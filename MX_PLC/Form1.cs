@@ -65,16 +65,87 @@ namespace MX_PLC
                 axActUtlType1.ActLogicalStationNumber = iLogicalStationNumber;
                 iReturnCode = axActUtlType1.Open();
 
-                if (iReturnCode == 0)
-                {
-                    txtLogicalStationNumber.Enabled = false;
-                }
-                txtReturnCode.Text = String.Format("0x{0:x8} [HEX]", iReturnCode);
+                //if (iReturnCode == 0)
+                //{
+                //    txtLogicalStationNumber.Enabled = false;
+                //}
+                txtReturnCode.Text = String.Format("0x{0:x8}", iReturnCode);
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message, Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+        }
+
+        private void btnReadDeviceBlock2_Click(object sender, EventArgs e)
+        {
+            int iReturnCode;				//Return code
+            String szDeviceName = "";		//List data for 'DeviceName'
+            int iNumberOfData = 0;			//Data for 'iNumberOfData'
+            short[] arrDeviceValue;		    //Data for 'DeviceValue'
+            int iNumber;					//Loop counter
+            System.String[] arrData;	    //Array for 'Data'
+
+
+            //Displayed output data is cleared.
+            txtMes.Text = "";
+
+            //Get the list of 'DeviceName'.
+            //  Join each line(StringType array) of 'DeviceName' by the separator '\n',
+            //  and create a joined string data.
+            szDeviceName = String.Join("\n", txtDeviceNameBlock2.Lines);
+
+            //Check the 'DeviceSize'.(If succeeded, the value is gotten.)
+            if (!GetIntValue(txtDeviceSizeBlock2, out iNumberOfData))
+            {
+                //If failed, this process is end.
+                return;
+            }
+
+            //Assign the array for 'DeviceValue'.
+            arrDeviceValue = new short[iNumberOfData];
+
+            //
+            //Processing of ReadDeviceBlock2 method
+            //
+            try
+            {
+                int data;
+                //The ReadDeviceBlock2 method is executed.
+                iReturnCode = axActUtlType1.ReadDeviceBlock2(szDeviceName,
+                                                             iNumberOfData,
+                                                             out arrDeviceValue[0]);
+            }
+
+            //Exception processing			
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, Name,
+                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //The return code of the method is displayed by the hexadecimal.
+            //txtReturnCode.Text = String.Format("0x{0:x8}", iReturnCode);
+
+            //
+            //Display the read data
+            //
+            //When the ReadDeviceBlock2 method is succeeded, display the read data.
+            if (iReturnCode == 0)
+            {
+                //Assign array for the read data.
+                arrData = new System.String[iNumberOfData];
+
+                //Copy the read data to the 'arrData'.
+                for (iNumber = 0; iNumber < iNumberOfData; iNumber++)
+                {
+                    arrData[iNumber] = arrDeviceValue[iNumber].ToString();
+                }
+
+                //Set the read data to the 'Data', and display it.
+                txtMes.Lines = arrData;
             }
         }
 
@@ -111,6 +182,7 @@ namespace MX_PLC
             //
             try
             {
+                int data;
                 //The ReadDeviceBlock2 method is executed.
                 iReturnCode = axActUtlType1.ReadDeviceBlock2(szDeviceName,
                                                              iNumberOfData,
@@ -216,6 +288,16 @@ namespace MX_PLC
 
             //The return code of the method is displayed by the hexadecimal.
             txtReturnCode.Text = String.Format("0x{0:x8} [HEX]", iReturnCode);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (txtReturnCode.Text == "0x00000000")
+            {
+                txtDeviceNameBlock2.Text = "M688";
+                txtDeviceSizeBlock2.Text = "1";
+                btnReadDeviceBlock2_Click(null, null);
+            }
         }
     }
 }

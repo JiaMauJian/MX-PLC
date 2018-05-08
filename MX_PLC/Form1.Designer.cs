@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.grp_Output = new System.Windows.Forms.GroupBox();
             this.txtReturnCode = new System.Windows.Forms.TextBox();
@@ -45,7 +46,18 @@
             this.txtLogicalStationNumber = new System.Windows.Forms.TextBox();
             this.lbl_LogicalStationNumber = new System.Windows.Forms.Label();
             this.btnWriteDeviceBlock = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.txtMes = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.axActUtlType1 = new AxActUtlTypeLib.AxActUtlType();
+            this.txtDeviceSizeBlock2 = new System.Windows.Forms.TextBox();
+            this.txtDeviceNameBlock2 = new System.Windows.Forms.TextBox();
             this.grp_Output.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axActUtlType1)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +70,7 @@
             this.grp_Output.Controls.Add(this.txtData);
             this.grp_Output.Location = new System.Drawing.Point(22, 245);
             this.grp_Output.Name = "grp_Output";
-            this.grp_Output.Size = new System.Drawing.Size(496, 152);
+            this.grp_Output.Size = new System.Drawing.Size(312, 287);
             this.grp_Output.TabIndex = 91;
             this.grp_Output.TabStop = false;
             this.grp_Output.Text = "Output";
@@ -68,7 +80,7 @@
             this.txtReturnCode.Location = new System.Drawing.Point(104, 16);
             this.txtReturnCode.Name = "txtReturnCode";
             this.txtReturnCode.ReadOnly = true;
-            this.txtReturnCode.Size = new System.Drawing.Size(128, 22);
+            this.txtReturnCode.Size = new System.Drawing.Size(202, 22);
             this.txtReturnCode.TabIndex = 50;
             this.txtReturnCode.TabStop = false;
             // 
@@ -96,7 +108,7 @@
             this.txtData.Name = "txtData";
             this.txtData.ReadOnly = true;
             this.txtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtData.Size = new System.Drawing.Size(456, 80);
+            this.txtData.Size = new System.Drawing.Size(280, 208);
             this.txtData.TabIndex = 50;
             this.txtData.TabStop = false;
             // 
@@ -124,6 +136,7 @@
             this.txtDeviceSizeBlock.Name = "txtDeviceSizeBlock";
             this.txtDeviceSizeBlock.Size = new System.Drawing.Size(72, 22);
             this.txtDeviceSizeBlock.TabIndex = 88;
+            this.txtDeviceSizeBlock.Text = "30";
             // 
             // lbl_DeviceSizeBlock
             // 
@@ -141,6 +154,7 @@
             this.txtDeviceNameBlock.Name = "txtDeviceNameBlock";
             this.txtDeviceNameBlock.Size = new System.Drawing.Size(96, 22);
             this.txtDeviceNameBlock.TabIndex = 86;
+            this.txtDeviceNameBlock.Text = "R10000";
             // 
             // lbl_DeviceNameBlock
             // 
@@ -188,7 +202,7 @@
             // 
             // btnWriteDeviceBlock
             // 
-            this.btnWriteDeviceBlock.Location = new System.Drawing.Point(126, 194);
+            this.btnWriteDeviceBlock.Location = new System.Drawing.Point(356, 194);
             this.btnWriteDeviceBlock.Name = "btnWriteDeviceBlock";
             this.btnWriteDeviceBlock.Size = new System.Drawing.Size(75, 23);
             this.btnWriteDeviceBlock.TabIndex = 92;
@@ -196,20 +210,125 @@
             this.btnWriteDeviceBlock.UseVisualStyleBackColor = true;
             this.btnWriteDeviceBlock.Click += new System.EventHandler(this.btnWriteDeviceBlock_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.AcceptsReturn = true;
+            this.textBox1.Location = new System.Drawing.Point(572, 115);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(96, 72);
+            this.textBox1.TabIndex = 99;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(572, 99);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 16);
+            this.label1.TabIndex = 98;
+            this.label1.Text = "DeviceData:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(478, 115);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(72, 22);
+            this.textBox2.TabIndex = 97;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(478, 99);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(88, 16);
+            this.label2.TabIndex = 96;
+            this.label2.Text = "DataSize:";
+            // 
+            // textBox3
+            // 
+            this.textBox3.AcceptsReturn = true;
+            this.textBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox3.Location = new System.Drawing.Point(354, 115);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(96, 22);
+            this.textBox3.TabIndex = 95;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(354, 99);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 16);
+            this.label3.TabIndex = 94;
+            this.label3.Text = "DevicelName:";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // txtMes
+            // 
+            this.txtMes.AcceptsReturn = true;
+            this.txtMes.Location = new System.Drawing.Point(357, 301);
+            this.txtMes.Multiline = true;
+            this.txtMes.Name = "txtMes";
+            this.txtMes.ReadOnly = true;
+            this.txtMes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMes.Size = new System.Drawing.Size(193, 231);
+            this.txtMes.TabIndex = 51;
+            this.txtMes.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(355, 245);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 12);
+            this.label4.TabIndex = 100;
+            this.label4.Text = "MES狀態啟用";
+            // 
             // axActUtlType1
             // 
             this.axActUtlType1.Enabled = true;
-            this.axActUtlType1.Location = new System.Drawing.Point(426, 138);
+            this.axActUtlType1.Location = new System.Drawing.Point(618, 24);
             this.axActUtlType1.Name = "axActUtlType1";
             this.axActUtlType1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axActUtlType1.OcxState")));
             this.axActUtlType1.Size = new System.Drawing.Size(32, 32);
             this.axActUtlType1.TabIndex = 93;
             // 
+            // txtDeviceSizeBlock2
+            // 
+            this.txtDeviceSizeBlock2.Location = new System.Drawing.Point(459, 270);
+            this.txtDeviceSizeBlock2.Name = "txtDeviceSizeBlock2";
+            this.txtDeviceSizeBlock2.Size = new System.Drawing.Size(72, 22);
+            this.txtDeviceSizeBlock2.TabIndex = 102;
+            this.txtDeviceSizeBlock2.Text = "1";
+            // 
+            // txtDeviceNameBlock2
+            // 
+            this.txtDeviceNameBlock2.AcceptsReturn = true;
+            this.txtDeviceNameBlock2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtDeviceNameBlock2.Location = new System.Drawing.Point(357, 270);
+            this.txtDeviceNameBlock2.Name = "txtDeviceNameBlock2";
+            this.txtDeviceNameBlock2.Size = new System.Drawing.Size(96, 22);
+            this.txtDeviceNameBlock2.TabIndex = 101;
+            this.txtDeviceNameBlock2.Text = "M688";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 471);
+            this.ClientSize = new System.Drawing.Size(699, 544);
+            this.Controls.Add(this.txtDeviceSizeBlock2);
+            this.Controls.Add(this.txtDeviceNameBlock2);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtMes);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.axActUtlType1);
             this.Controls.Add(this.grp_Output);
             this.Controls.Add(this.txtDeviceDataBlock);
@@ -253,6 +372,17 @@
         internal System.Windows.Forms.Label lbl_LogicalStationNumber;
         private System.Windows.Forms.Button btnWriteDeviceBlock;
         private AxActUtlTypeLib.AxActUtlType axActUtlType1;
+        internal System.Windows.Forms.TextBox textBox1;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.TextBox textBox2;
+        internal System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.TextBox textBox3;
+        internal System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Timer timer1;
+        internal System.Windows.Forms.TextBox txtMes;
+        private System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.TextBox txtDeviceSizeBlock2;
+        internal System.Windows.Forms.TextBox txtDeviceNameBlock2;
     }
 }
 
