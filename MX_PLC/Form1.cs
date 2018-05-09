@@ -78,6 +78,37 @@ namespace MX_PLC
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int iReturnCode = 0;                //Return code
+            int iLogicalStationNumber;      //LogicalStationNumber for ActUtlType
+
+            try
+            {
+                axActUtlType1.Close();
+
+                if (GetIntValue(txtLogicalStationNumber, out iLogicalStationNumber) != true)
+                {
+                    //If failed, this process is end.			
+                    return;
+                }
+
+                axActUtlType1.ActLogicalStationNumber = iLogicalStationNumber;
+                iReturnCode = axActUtlType1.Open();
+
+                //if (iReturnCode == 0)
+                //{
+                //    txtLogicalStationNumber.Enabled = false;
+                //}
+                txtReturnCode.Text = String.Format("0x{0:x8}", iReturnCode);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+        }
         private void btnReadDeviceBlock2_Click(object sender, EventArgs e)
         {
             int iReturnCode;				//Return code
@@ -235,17 +266,17 @@ namespace MX_PLC
             //Get the list of 'DeviceName'.
             //  Join each line(StringType array) of 'DeviceName' by the separator '\n',
             //  and create a joined string data.
-            szDeviceName = String.Join("\n", txtDeviceNameBlock.Lines);
+            szDeviceName = String.Join("\n", txtDeviceNameBlock3.Lines);
 
             //Check the 'DeviceSize'.(If succeeded, the value is gotten.)
-            if (!GetIntValue(txtDeviceSizeBlock, out iNumberOfData))
+            if (!GetIntValue(txtDeviceSizeBlock3, out iNumberOfData))
             {
                 //If failed, this process is end.
                 return;
             }
 
             //Get size for 'DeviceValue'
-            iSizeOfIntArray = txtDeviceDataBlock.Lines.Length;
+            iSizeOfIntArray = txtDeviceDataBlock3.Lines.Length;
             //Assign the array for 'DeviceValue'.
             arrDeviceValue = new short[iNumberOfData];
 
@@ -255,7 +286,7 @@ namespace MX_PLC
                 try
                 {
                     arrDeviceValue[iNumber]
-                        = Convert.ToInt16(txtDeviceDataBlock.Lines[iNumber]);
+                        = Convert.ToInt16(txtDeviceDataBlock3.Lines[iNumber]);
                 }
 
                 //Exception processing
@@ -287,7 +318,7 @@ namespace MX_PLC
             }
 
             //The return code of the method is displayed by the hexadecimal.
-            txtReturnCode.Text = String.Format("0x{0:x8} [HEX]", iReturnCode);
+            //txtReturnCode.Text = String.Format("0x{0:x8} [HEX]", iReturnCode);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
