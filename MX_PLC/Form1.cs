@@ -325,8 +325,6 @@ namespace MX_PLC
         {
             if (txtReturnCode.Text == "0x00000000")
             {
-                txtDeviceNameBlock2.Text = "M688";
-                txtDeviceSizeBlock2.Text = "1";
                 btnReadDeviceBlock2_Click(null, null);
             }
         }
